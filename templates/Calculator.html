@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+     <meta charset="UTF-8">
+        <title>Calculator</title>
+        <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+        <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <title>Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+    />
+    </style>
+  </head>
+  <body>
+    <!-- Form -->
+    <div class="container">
+      <form name="send" action="/send" method="POST">
+        <div class="page-wrapper">
+          <input type="text" name="disp" placeholder="Enter comma separated data for statistic calculation" id="input" class="input" value={{ result }}>
+          <input type="text" name="data" class="form-control" value="" hidden>
+        </div>
+        <div class="row">
+          <input type="button" value="√x" class=""
+                 onClick="document.send.disp.value+='**(1/2)';document.send.data.value+='sqrt' ">
+          <input type="button" value="xˆ2" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='**2';document.send.data.value+='sq' ">
+          <input type="button" value="," class="nums btn btn-default"
+                 onClick="document.send.disp.value+=',';document.send.data.value+=',' ">
+          <input type="reset" value="C" class="btn-clear btn btn-danger"
+          />
+        <div class="row">
+          <input type="button" value="7" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='7';document.send.data.value+='7' ">
+          <input type="button" value="8" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='8';document.send.data.value+='8' ">
+          <input type="button" value="9" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='9';document.send.data.value+='9' ">
+          <input type="button" value="&#247" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='&#247';document.send.data.value+='/' "
+          />
+          <div class="row">
+          <input type="button" value="4" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='4';document.send.data.value+='4' ">
+          <input type="button" value="5" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='5';document.send.data.value+='5' ">
+          <input type="button" value="6" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='6';document.send.data.value+='6' ">
+          <input type="button" value="*" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='*';document.send.data.value+='*' "
+          />
+          <div class="row">
+          <input type="button" value="1" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='1';document.send.data.value+='1' ">
+          <input type="button" value="2" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='2';document.send.data.value+='2' ">
+          <input type="button" value="3" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='3';document.send.data.value+='3' ">
+          <input type="button" value="-" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='-';document.send.data.value+='-' "
+          />
+          <div class="row">
+          <input type="button" value="0" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='0';document.send.data.value+='0' ">
+          <input type="button" value="." class="nums btn btn-default"
+                 onClick="document.send.disp.value+='.';document.send.data.value+='.' ">
+          <input type="submit" value="=" id="calc_btn">
+          <input type="button" value="+" class="nums btn btn-default"
+                 onClick="document.send.disp.value+='+';document.send.data.value+='+' "
+          />
+        <label for="Choose Operation">Choose Operation</label>
+        <select class="u-full-width" name="operation">
+          <option value="mean">mean</option>
+          <option value="median">median</option>
+          <option value="mode">mode</option>
+          <option value="standard deviation">standard deviation</option>
+          <option value="variance">variance</option>
+          <option value="z score">z score</option>
+          <option value="population correlation coefficient">population correlation coefficient</option>
+          <option value="confidence interval">confidence interval</option>
+          <option value="population variance">population variance</option>
+          <option value="sin">sin</option>
+          <option value="cos">cos</option>
+          <option value="tan">tan</option>
+        </select>
+        <table>
+           <tr>
+              <th>name</th>
+              <th>numbers</th>
+              <th>operation</th>
+              <th>result</th>
+           {% for x in all_data %}
+             <tr>
+                 <td>{{ x.name }}</td>
+                 <td>{{ x.numbers }}</td>
+                 <td>{{ x.operation }}</td>
+                 <td>{{ x.result }}</td>
+                 <td>
+                    <button type="button">Delete</button>
+                 </td>
+             </tr>
+           {% endfor %}
+        </table>
+        <div class="alert">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+{% endblock %}
