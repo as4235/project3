@@ -1,9 +1,4 @@
 import pytest
-from flask import url_for
-from FlaskLogin import db
-from FlaskLogin.models import User
-from flask_login import login_required, current_user
-from FlaskLogin import create_app
 
 
 @pytest.fixture
